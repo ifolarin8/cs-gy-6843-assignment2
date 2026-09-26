@@ -48,12 +48,10 @@ def webServer(port=13331):
       for i in f: #for line in file
           outputdata += i
 
+      f.close() # close the file
       connectionSocket.send(outputdata)
       connectionSocket.close()
-      #Fill in start - append your html file contents #Fill in end 
-        
-      #Send the content of the requested file to the client (don't forget the headers you created)!
-      #Send everything as one send command, do not send one line/item at a time!
+      
 
       
 
@@ -63,16 +61,16 @@ def webServer(port=13331):
         
     
     except Exception as e:
-      error_response = b"HTTP/1.1 404 Not Found\r\n"
-      error_response += b"Server: MyWebServer\r\n"
-      error_response += b"Content-Type: text/html; charset=UTF-8\r\n"
-      error_response += b"Connection: close\r\n"
-      error_response += b"\r\n"
-      error_response += b"<HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>"
-      error_response += b"<BODY>404: File Not Found</BODY></HTML>"
+     error_response = b"HTTP/1.1 404 Not Found\r\n"
+     error_response += b"Server: MyWebServer\r\n"
+     error_response += b"Content-Type: text/html; charset=UTF-8\r\n"
+     error_response += b"Connection: close\r\n"
+     error_response += b"\r\n"
+     error_response += b"<HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>"
+     error_response += b"<BODY>404: File Not Found</BODY></HTML>"
       
-      connectionSocket.send(error_response)
-      connectionSocket.close() #closing the connection socket
+     connectionSocket.send(error_response)
+     connectionSocket.close() # closing the connection socket
 
   # Commenting out the below (some use it for local testing). It is not required for Gradescope, and some students have moved it erroneously in the While loop. 
   # DO NOT PLACE ANYWHERE ELSE AND DO NOT UNCOMMENT WHEN SUBMITTING, YOU ARE GONNA HAVE A BAD TIME
